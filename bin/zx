@@ -1,0 +1,50 @@
+#! /usr/bin/env node
+
+// console.log("zx-cli");
+
+// 1. 配置可执行命令 commander
+const program = require("commander");
+
+// 格式化参数
+const cleanArgs = (cmd) => {
+  const args = {};
+  cmd.options.forEach((o) => {
+    const key = o.long.slice(2);
+    if (cmd[key]) {
+      args[key] = cmd[key];
+    }
+  });
+  return args;
+};
+
+// 核心功能：1. 创建项目 2.更改配置文件 3. 提供UI界面
+
+// 创建create命令
+program
+  .command("create <app-name>")
+  .description("create a new project")
+  .option("-f, --force", "overwrite target directory if it exists") // 如果重名，强制创建
+  .action((name, cmd) => {
+    // console.log(name, cmd); // 打印出参数, 太多了需要格式化
+    console.log(name, cleanArgs(cmd));
+  });
+
+// 创建config命令
+program
+  .command("config [value]")
+  .description("inspect and modify the config")
+  .option("-g, --get <path>", "get value from option")
+  .option("-s, --set <path> <value>")
+  .action((value, cmd) => {
+    console.log(value, cleanArgs(cmd));
+  });
+
+program
+  .version(`zx-cli ${require("../package.json").version}`)
+  .usage(`<command> [option]`);
+// 解析用户执行命令传入的参数
+program.parse(process.argv);
+
+// 2. 实现命令行交互的功能 inquirer
+// 3. 将模板下载下来 download-git-repo
+// 4. 根据用户选择动态生成内容 metalsmith
