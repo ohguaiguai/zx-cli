@@ -3,12 +3,12 @@
  * @author: zhangxing
  * @Date: 2020-08-23 20:35:34
  * @LastEditors: zhangxing
- * @LastEditTime: 2020-09-01 22:35:01
+ * @LastEditTime: 2020-09-08 11:00:34
 -->
 
 1. 创建可执行的脚本
 
-这一句必须的
+下面这一句必须的
 
 ```bash
 #! /usr/bin/env node 使用全局环境中安装的 node
@@ -33,3 +33,7 @@
   "zx-cli": "./bind/zx"
 }
 ```
+
+这样我们就可以通过执行 `zx --help`来查看所有命令了
+
+4.
